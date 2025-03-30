@@ -1,4 +1,7 @@
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
+import 'dart:io';
 
 void main() async {
   runApp(const MyApp());
@@ -12,9 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -30,53 +31,81 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  var input;
-  late var socket;
+  String connectivity = 'Ожидание подключения';
+  late Socket socket;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  final List<DropItem> _list = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: SafeArea(
+        top: true,
+        child: Align(
+          alignment: AlignmentDirectional(0, 0),
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 1,
             ),
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'введите число',
+            scrollDirection: Axis.vertical,
+            children: [
+              Padding(
+                padding: EdgeInsetsGeometry.fromSTEB(20, 20, 0, 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: AlignmentGeometry.directional(-1, 0),
+                        width: 400,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                        ),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 20,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  connectivity = 'подключено';
+                                });
+                              },
+                              icon: Icon(Icons.check),
+                            ),
+                            Text(connectivity),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              onSubmitted: (text) {
-                input = text;
-                socket.write(input);
-              },
-            ),
-            FilledButton(
-              onPressed: _incrementCounter,
-              child: Text('Отправить'),
-            ),
-          ],
+              DropTarget(
+                onDragDone: (details) {
+                  setState(() {
+                    _list.addAll(details.files);
+                  });
+                },
+                child: Container(
+                  alignment: AlignmentGeometry.directional(0, 0),
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(color: Theme.of(context).colorScheme.inversePrimary),
+                  child: Stack(children: [Center(child: Text('Перетащите изображение сюда'))]),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
