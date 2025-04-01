@@ -11,7 +11,7 @@ void main() {
       print(message);
 
       // Имитация асинхронной обработки
-      await Future.delayed(Duration(seconds: rnd.nextInt(3) + 1));
+      await Future.delayed(Duration(milliseconds: rnd.nextInt(300) + 10));
 
       channel.sink.add([2]); // Сигнал клиенту
     });
