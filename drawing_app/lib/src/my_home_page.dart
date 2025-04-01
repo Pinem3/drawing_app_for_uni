@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(widget.title),
+        title: Text(widget.title, style: TextStyle(color: Colors.white)),
       ),
       body: SafeArea(
         top: true,
@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     scaleImage(_image!);
                                   });
                                 },
-                                child: Text('Изменить разрмер изображения'),
+                                child: Text('Изменить размер изображения'),
                               ),
                               SizedBox(height: 20.0),
                               ElevatedButton(
