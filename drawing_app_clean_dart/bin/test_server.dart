@@ -8,17 +8,16 @@ void main() {
   var rnd = Random();
   final handler = webSocketHandler((WebSocketChannel channel) async {
     channel.stream.listen((message) async {
-      final number = int.parse(message);
-      print("Сервер: Обработка числа $number");
+      print(message);
 
       // Имитация асинхронной обработки
-      await Future.delayed(Duration(seconds: rnd.nextInt(10)));
+      await Future.delayed(Duration(seconds: rnd.nextInt(3) + 1));
 
-      channel.sink.add('2'); // Сигнал клиенту
+      channel.sink.add([2]); // Сигнал клиенту
     });
   });
 
   serve(handler, '127.0.0.1', 228).then((server) {
-    print('Сервер запущен на ws://localhost:8080');
+    print('Сервер запущен на ws://localhost:228');
   });
 }

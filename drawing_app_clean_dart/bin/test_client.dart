@@ -1,21 +1,32 @@
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-void main() async {
+Future<void> main() async {
   final channel = WebSocketChannel.connect(Uri.parse('ws://127.0.0.1:228'));
 
-  // Отправка чисел
-  for (int i = 1; i <= 5; i++) {
-    print("Клиент: Отправка числа $i");
-    channel.sink.add(i.toString());
-    await Future.delayed(Duration(seconds: 10));
+  final numbers = [1, 2, 3, 4, 5]; // Числа для отправки
+  int index = 0;
+
+  void sendNextNumber() {
+    if (index >= numbers.length) {
+      channel.sink.close();
+      return;
+    }
+
+    final number = numbers[index];
+    print("Клиент: Отправка числа $number");
+    channel.sink.add(number.toString());
+    index++;
   }
 
-  // Получение ответов
+  // Обработка ответов сервера
   channel.stream.listen((response) {
-    print("Клиент: $response");
+    print("Клиент: Получен сигнал — $response");
+    sendNextNumber(); // Отправляем следующее число сразу после ответа
   });
 
-  // Закрытие соединения (по необходимости)
-  await Future.delayed(Duration(seconds: 10));
-  channel.sink.close();
+  // Запускаем процесс
+  sendNextNumber();
+
+  // Ждём завершения (в реальном приложении можно использовать Completer)
+  await Future.delayed(Duration(seconds: 30));
 }

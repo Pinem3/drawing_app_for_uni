@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   PanelLocation? dropPreview;
   String? hoveringData;
   String parkingText = 'Выполнить парковку';
+  int coord = 0;
 
   Uint8List int32bytes(int input) {
     return Uint8List(4)..buffer.asInt32List()[0] = input;
@@ -84,9 +85,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                   setState(() {
                                     connectivity = 'ожидание подключения';
                                   });
+                                  if (socket != null) {
+                                    socket!.sink.close();
+                                  }
                                   socket = WebSocketChannel.connect(
-                                    Uri.parse('ws://127.0.0.1:8080'),
+                                    Uri.parse('ws://127.0.0.1:228'),
                                   );
+                                  socket!.stream.listen((response) {
+                                    if (response[0] == 2) {
+                                      endLine = false;
+                                      coord++;
+                                      putPath(socket!, generatedPath, coord);
+                                    }
+                                  });
                                   setState(() {
                                     connectivity = 'подключено';
                                   });
@@ -153,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
+                                    coord++;
                                     generatedPath = generatePath(_image!);
                                   });
                                 },
@@ -183,9 +195,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
-                                    for (int i = 0; i < generatedPath.length; i++) {
-                                      putPath(socket!, generatedPath, endLine, i);
-                                    }
+                                    coord = 0;
+                                    putPath(socket!, generatedPath, coord);
                                   });
                                 },
                                 child: Text('Выполнить путь'),
@@ -307,35 +318,27 @@ class _MyHomePageState extends State<MyHomePage> {
     return finalPath;
   }
 
-  void putPath(WebSocketChannel socket, List<Offset> path, bool endLine, int coord) {
+  void putPath(WebSocketChannel socket, List<Offset> path, int coord) async {
     List<int> outList = [];
     List<double> coords = [];
     Uint8List val = Uint8List(8);
-    List<int> iVal = [];
-    endLine = false;
-    while (coord < path.length) {
-      if (endLine == false) {
-        if (coord % 2 == 0) {
-          outList = int32bytes(256);
-        } else {
-          outList = int32bytes(255);
-        }
-        coords = [path[coord].dx, path[coord].dy];
-        for (int j = 0; j < coords.length; j++) {
-          val.buffer.asFloat64List()[0] = coords[j];
-          iVal += val;
-        }
-        outList += iVal;
-        endLine = true;
-        socket.sink.add(outList.toString());
-        Future.delayed(Duration(seconds: 10));
-        socket.stream.listen((response) {
-          if (response == '2') {
-            endLine = false;
-            coord++;
-          }
-        });
+    if (coord < path.length) {
+      if (coord % 2 == 0) {
+        outList = int32bytes(256);
+      } else {
+        outList = int32bytes(255);
       }
+      List<int> iVal = [];
+      coords = [path[coord].dx, path[coord].dy];
+      for (int j = 0; j < coords.length; j++) {
+        val.buffer.asFloat64List()[0] = coords[j];
+        iVal += val;
+      }
+      outList += iVal;
+      socket.sink.add(outList.toString());
+    } else {
+      coord = 0;
+      return;
     }
   }
 }
