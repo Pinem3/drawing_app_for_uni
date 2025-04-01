@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "plugins/super_native_extensions",
+		"source" : "flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows"
+	}
+}

@@ -7,7 +7,6 @@ void main(List<String> arguments) async {
   final path = input.isNotEmpty ? input[0] : 'test.png';
   img.Image myImage = img.decodeImageFile(path) as img.Image;
   convertToBlackAndWhite(myImage);
-  List<Offset> robotPath = generatePath(myImage);
 }
 
 img.Image convertToBlackAndWhite(img.Image image) {

@@ -1,0 +1,87 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"apply_cargokit"
+		],
+		"files" : 
+		[
+			"flutter/ephemeral/.plugin_symlinks/super_native_extensions/cargokit/cmake/cargokit.cmake",
+			"flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 48,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 85,
+				"parent" : 1
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "super_native_extensions_plugin_cargokit::@9132bc3db381ba05852d",
+	"name" : "super_native_extensions_plugin_cargokit",
+	"paths" : 
+	{
+		"build" : "plugins/super_native_extensions",
+		"source" : "flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "D:/Repositories/drawing_app_for_uni/build/plugins/super_native_extensions/CMakeFiles/super_native_extensions_plugin_cargokit",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "D:/Repositories/drawing_app_for_uni/build/CMakeFiles/7dca73b583e2932ee157e4b6725354b2/super_native_extensions_plugin_cargokit.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "D:/Repositories/drawing_app_for_uni/build/CMakeFiles/b8ab5f9f2e37b047df7c887a922a252c/super_native_extensions.dll.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

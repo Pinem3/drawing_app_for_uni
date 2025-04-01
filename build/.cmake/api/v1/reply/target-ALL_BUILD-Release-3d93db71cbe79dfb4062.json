@@ -1,0 +1,36 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"flutter/ephemeral/.plugin_symlinks/irondash_engine_context/windows/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "irondash_engine_context_plugin::@9d4163d2d86979c26fd9"
+		},
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "ALL_BUILD::@9d4163d2d86979c26fd9",
+	"isGeneratorProvided" : true,
+	"name" : "ALL_BUILD",
+	"paths" : 
+	{
+		"build" : "plugins/irondash_engine_context",
+		"source" : "flutter/ephemeral/.plugin_symlinks/irondash_engine_context/windows"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

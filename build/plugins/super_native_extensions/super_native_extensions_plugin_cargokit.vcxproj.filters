@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Repositories\drawing_app_for_uni\build\CMakeFiles\b8ab5f9f2e37b047df7c887a922a252c\super_native_extensions.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Repositories\drawing_app_for_uni\build\CMakeFiles\7dca73b583e2932ee157e4b6725354b2\super_native_extensions_plugin_cargokit.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\super_native_extensions\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Repositories\drawing_app_for_uni\build\plugins\super_native_extensions\CMakeFiles\super_native_extensions_plugin_cargokit" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5B5823CD-573C-3B0D-99B9-1E2CD13EB604}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

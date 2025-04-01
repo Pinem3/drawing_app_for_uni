@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\irondash_engine_context\windows\irondash_engine_context_plugin_c_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\irondash_engine_context\windows\irondash_engine_context_plugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\irondash_engine_context\windows\include\irondash_engine_context\irondash_engine_context_plugin_c_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\irondash_engine_context\windows\irondash_engine_context_plugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Repositories\drawing_app_for_uni\drawing_app\windows\flutter\ephemeral\.plugin_symlinks\irondash_engine_context\windows\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{9E0B0630-A1AE-3BAA-8C3F-27DF7EE8BBC2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A0F644AC-856F-3F4F-8231-32EFC7BCAB14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

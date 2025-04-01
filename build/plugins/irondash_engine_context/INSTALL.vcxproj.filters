@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Repositories\drawing_app_for_uni\build\CMakeFiles\d764db938ced8f45a8ffe9f31c2ff34e\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5B5823CD-573C-3B0D-99B9-1E2CD13EB604}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 import 'package:flutter/material.dart';
 import 'package:super_drag_and_drop/super_drag_and_drop.dart';
 import 'types.dart';
@@ -16,19 +20,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String connectivity = 'Ожидание подключения';
-  late Socket socket;
+  WebSocketChannel? socket;
   String? _error;
   String inputPath = '';
   img.Image? _image;
+  bool normImage = false;
   bool isGray = false;
   bool isScaled = false;
   bool isParked = false;
   bool endLine = false;
+  bool _isPainting = false;
   List<Offset> generatedPath = <Offset>[];
   PanelLocation? dragStart;
   PanelLocation? dropPreview;
   String? hoveringData;
-  String parkingText = 'Вфполнить парковку';
+  String parkingText = 'Выполнить парковку';
 
   Uint8List int32bytes(int input) {
     return Uint8List(4)..buffer.asInt32List()[0] = input;
@@ -78,12 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   setState(() {
                                     connectivity = 'ожидание подключения';
                                   });
-                                  socket = await Socket.connect(
-                                    '10.0.174.50',
-                                    228,
-                                    timeout: Duration(seconds: 5),
+                                  socket = WebSocketChannel.connect(
+                                    Uri.parse('ws://127.0.0.1:8080'),
                                   );
-
                                   setState(() {
                                     connectivity = 'подключено';
                                   });
@@ -116,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 _image = img.decodePng(bytes);
                               }
                             }
+                            normImage = true;
                             isGray = false;
                             isScaled = false;
                           });
@@ -154,7 +158,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                                 child: Text('Сгенерировать путь'),
                               ),
-                              SizedBox(height: 20.0),
                             ],
                           ),
                           Column(
@@ -166,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   var j = int32bytes(input);
                                   try {
                                     setState(() {
-                                      socket.add(j);
+                                      socket!.sink.add(j);
                                     });
                                   } catch (e) {
                                     setState(() {
@@ -180,36 +183,22 @@ class _MyHomePageState extends State<MyHomePage> {
                               ElevatedButton(
                                 onPressed: () {
                                   setState(() {
-                                    for (
-                                      int i = 0;
-                                      i < generatedPath.length;
-                                      i++
-                                    ) {
-                                      putPath(
-                                        socket,
-                                        generatedPath,
-                                        endLine,
-                                        i,
-                                      );
+                                    for (int i = 0; i < generatedPath.length; i++) {
+                                      putPath(socket!, generatedPath, endLine, i);
                                     }
-                                    socket.listen((List<int> data) {
-                                      if (data[0] == 1) {
-                                        setState(() {
-                                          isParked = true;
-                                          parkingText = 'Парковка выполнена';
-                                        });
-                                        if (data[0] == 2) {
-                                          setState(() {
-                                            endLine = false;
-                                          });
-                                        } else {
-                                          endLine = true;
-                                        }
-                                      }
-                                    });
                                   });
                                 },
                                 child: Text('Выполнить путь'),
+                              ),
+                              SizedBox(height: 20.0),
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isPainting = true;
+                                    normImage = false;
+                                  });
+                                },
+                                child: Text('Показать путь'),
                               ),
                             ],
                           ),
@@ -232,23 +221,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   final item = event.session.items.first;
 
                   final reader = item.dataReader;
-                  if (reader!.canProvide(Formats.png) ||
-                      reader.canProvide(Formats.jpeg)) {
+                  if (reader!.canProvide(Formats.png) || reader.canProvide(Formats.jpeg)) {
                     reader.getFile(Formats.png, (value) async {
                       final Stream<Uint8List> stream = value.getStream();
                       _image = Image.memory(await stream.first) as img.Image?;
                     });
                   }
                 },
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.grey[300],
+                child: Align(
+                  alignment: AlignmentGeometry.directional(0, 0),
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey[300],
+                    ),
+                    child: _buildContent(),
                   ),
-                  child: _buildContent(),
                 ),
               ),
             ],
@@ -262,11 +253,14 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_error != null) {
       return Center(child: Text(_error!, style: TextStyle(color: Colors.red)));
     }
-    if (_image != null) {
+    if (normImage == true) {
       // Отображаем декодированное изображение
-      return Image.memory(
-        Uint8List.fromList(img.encodePng(_image!)),
-        scale: 0.5,
+      return Image.memory(Uint8List.fromList(img.encodePng(_image!)), scale: 0.5);
+    }
+    if (_isPainting == true) {
+      return CustomPainting(
+        path: generatedPath,
+        size: Size(_image!.width.toDouble(), _image!.height.toDouble()),
       );
     }
     return Center(child: Text("Перетащите изображение сюда"));
@@ -279,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
   img.Image scaleImage(img.Image image) {
     return img.resize(
       image,
-      width: (image.width > image.height) ? 200 : null,
+      width: (image.width >= image.height) ? 200 : null,
       height: (image.height > image.width) ? 200 : null,
       maintainAspect: true,
     );
@@ -287,7 +281,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Offset> generatePath(img.Image image) {
     final path = <Offset>[];
-    double linesize = 1.0;
     for (var y = 0; y < image.height; y++) {
       for (var x = 0; x < image.width; x++) {
         final pixel = image.getPixel(x, y);
@@ -297,39 +290,102 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
     }
-    for (int i = 1; i < path.length - 1; i++) {
-      if (path[i].dx - linesize == path[i - 1].dx &&
-          path[i].dy == path[i + 1].dy) {
-        path.removeAt(i);
-        linesize++;
-        i--;
-      } else {
-        linesize = 1;
+    int left = 0;
+    List<Offset> finalPath = [];
+    for (int right = 1; right <= path.length - 1; right++) {
+      if (right == path.length || path[right].dx - path[right - 1].dx != 1) {
+        if (left == right - 1) {
+          finalPath.add(path[left]);
+          finalPath.add(path[left]);
+        } else {
+          finalPath.add(path[left]);
+          finalPath.add(path[right - 1]);
+        }
+        left = right;
       }
     }
-    return path;
+    return finalPath;
   }
 
-  void putPath(Socket socket, List<Offset> path, bool endLine, int coord) {
+  void putPath(WebSocketChannel socket, List<Offset> path, bool endLine, int coord) {
     List<int> outList = [];
     List<double> coords = [];
     Uint8List val = Uint8List(8);
     List<int> iVal = [];
     endLine = false;
-    if (endLine == false) {
-      if (coord % 2 == 0) {
-        outList = int32bytes(256);
-      } else {
-        outList = int32bytes(255);
+    while (coord < path.length) {
+      if (endLine == false) {
+        if (coord % 2 == 0) {
+          outList = int32bytes(256);
+        } else {
+          outList = int32bytes(255);
+        }
+        coords = [path[coord].dx, path[coord].dy];
+        for (int j = 0; j < coords.length; j++) {
+          val.buffer.asFloat64List()[0] = coords[j];
+          iVal += val;
+        }
+        outList += iVal;
+        endLine = true;
+        socket.sink.add(outList.toString());
+        Future.delayed(Duration(seconds: 10));
+        socket.stream.listen((response) {
+          if (response == '2') {
+            endLine = false;
+            coord++;
+          }
+        });
       }
-      coords = [path[coord].dx, path[coord].dy];
-      for (int j = 0; j < coords.length; j++) {
-        val.buffer.asFloat64List()[0] = coords[j];
-        iVal += val;
-      }
-      outList += iVal;
-      endLine = true;
-      socket.add(outList);
     }
   }
+}
+
+// ignore: must_be_immutable
+class CustomPainting extends StatelessWidget {
+  List<Offset> path;
+  Size size;
+  CustomPainting({super.key, required this.path, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(painter: BWPicture(path: path, canvasSize: size));
+  }
+}
+
+class BWPicture extends CustomPainter {
+  List<Offset> path;
+  Size canvasSize;
+  BWPicture({required this.path, required this.canvasSize});
+  final myPaint =
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1
+        ..color = Colors.black;
+  @override
+  void paint(Canvas canvas, Size size) {
+    size = canvasSize;
+    canvas.drawRect(
+      Rect.fromPoints(Offset.zero, Offset(size.width, size.height)),
+      Paint()..color = Colors.white,
+    );
+    canvas.drawPoints(PointMode.points, path, myPaint);
+    for (int i = 0; i < path.length; i += 2) {
+      if (path[i].dy == path[i + 1].dy) {
+        canvas.drawLine(path[i], path[i + 1], myPaint);
+      } else {
+        canvas.drawLine(path[i], Offset(canvasSize.width, path[i].dy), myPaint);
+        i--;
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) =>
+      path != oldDelegate.path || size != oldDelegate.size;
+}
+
+extension on CustomPainter {
+  Object get path => [];
+
+  Object get size => Size.zero;
 }
