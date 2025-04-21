@@ -1,0 +1,892 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d8a05278f4eeca84346d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"build" : "flutter",
+					"jsonFile" : "directory-flutter-Debug-79e0260f2327d8493c28.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "flutter",
+					"targetIndexes" : 
+					[
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "runner",
+					"jsonFile" : "directory-runner-Debug-86f38b7dcb6f33eb04e4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "runner",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "plugins/desktop_drop",
+					"jsonFile" : "directory-plugins.desktop_drop-Debug-8d64fd618de05621e7c7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "flutter/ephemeral/.plugin_symlinks/desktop_drop/windows",
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"build" : "plugins/irondash_engine_context",
+					"jsonFile" : "directory-plugins.irondash_engine_context-Debug-24d8a2dc172ea834d9f2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "flutter/ephemeral/.plugin_symlinks/irondash_engine_context/windows",
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"build" : "plugins/super_native_extensions",
+					"jsonFile" : "directory-plugins.super_native_extensions-Debug-e28787b3c0f294e714a2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows",
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "drawing_app",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "runner",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "desktop_drop",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "irondash_engine_context",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "super_native_extensions",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Debug-1a6d7c52a531523efc4f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-ALL_BUILD-Debug-674a2c4269d8c78c35d7.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-ALL_BUILD-Debug-51e775be8d65233df547.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-ALL_BUILD-Debug-3d93db71cbe79dfb4062.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "ALL_BUILD::@9132bc3db381ba05852d",
+					"jsonFile" : "target-ALL_BUILD-Debug-7c12796f81dc8a0ac251.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Debug-cb0f9946b613c287b074.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "desktop_drop_plugin::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-desktop_drop_plugin-Debug-1386e0d611265e430f32.json",
+					"name" : "desktop_drop_plugin",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "drawing_app::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-drawing_app-Debug-ec7e27e49c3b45d6d4a8.json",
+					"name" : "drawing_app",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_assemble::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_assemble-Debug-73bf36e86aee8e2cf63a.json",
+					"name" : "flutter_assemble",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_app::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_app-Debug-d4399d91360ef42f3df6.json",
+					"name" : "flutter_wrapper_app",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_plugin::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_plugin-Debug-5a37f6d21eff5ba22e83.json",
+					"name" : "flutter_wrapper_plugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "irondash_engine_context_plugin::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-irondash_engine_context_plugin-Debug-a7bd53566b3b3e891521.json",
+					"name" : "irondash_engine_context_plugin",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin-Debug-592f09820d25e2041c58.json",
+					"name" : "super_native_extensions_plugin",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin_cargokit::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin_cargokit-Debug-49231ec47eaadd917396.json",
+					"name" : "super_native_extensions_plugin_cargokit",
+					"projectIndex" : 4
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Profile-4686026a928a0ee00618.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"build" : "flutter",
+					"jsonFile" : "directory-flutter-Profile-79e0260f2327d8493c28.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "flutter",
+					"targetIndexes" : 
+					[
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "runner",
+					"jsonFile" : "directory-runner-Profile-86f38b7dcb6f33eb04e4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "runner",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "plugins/desktop_drop",
+					"jsonFile" : "directory-plugins.desktop_drop-Profile-8d64fd618de05621e7c7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "flutter/ephemeral/.plugin_symlinks/desktop_drop/windows",
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"build" : "plugins/irondash_engine_context",
+					"jsonFile" : "directory-plugins.irondash_engine_context-Profile-24d8a2dc172ea834d9f2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "flutter/ephemeral/.plugin_symlinks/irondash_engine_context/windows",
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"build" : "plugins/super_native_extensions",
+					"jsonFile" : "directory-plugins.super_native_extensions-Profile-e28787b3c0f294e714a2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows",
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"name" : "Profile",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "drawing_app",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "runner",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "desktop_drop",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "irondash_engine_context",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "super_native_extensions",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Profile-1a6d7c52a531523efc4f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-ALL_BUILD-Profile-674a2c4269d8c78c35d7.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-ALL_BUILD-Profile-51e775be8d65233df547.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-ALL_BUILD-Profile-3d93db71cbe79dfb4062.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "ALL_BUILD::@9132bc3db381ba05852d",
+					"jsonFile" : "target-ALL_BUILD-Profile-7c12796f81dc8a0ac251.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Profile-cb0f9946b613c287b074.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "desktop_drop_plugin::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-desktop_drop_plugin-Profile-18f1c9fa1a6d498f102b.json",
+					"name" : "desktop_drop_plugin",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "drawing_app::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-drawing_app-Profile-e0533c55f4e1a84dca6c.json",
+					"name" : "drawing_app",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_assemble::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_assemble-Profile-73bf36e86aee8e2cf63a.json",
+					"name" : "flutter_assemble",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_app::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_app-Profile-135e87f2e8dc4cc2cbee.json",
+					"name" : "flutter_wrapper_app",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_plugin::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_plugin-Profile-2017f4a12be72db00f67.json",
+					"name" : "flutter_wrapper_plugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "irondash_engine_context_plugin::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-irondash_engine_context_plugin-Profile-9e20f4e61757be3df419.json",
+					"name" : "irondash_engine_context_plugin",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin-Profile-b72ad1033041aac261a9.json",
+					"name" : "super_native_extensions_plugin",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin_cargokit::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin_cargokit-Profile-49231ec47eaadd917396.json",
+					"name" : "super_native_extensions_plugin_cargokit",
+					"projectIndex" : 4
+				}
+			]
+		},
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-19adfbeda21057d94e3e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						5
+					]
+				},
+				{
+					"build" : "flutter",
+					"jsonFile" : "directory-flutter-Release-79e0260f2327d8493c28.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "flutter",
+					"targetIndexes" : 
+					[
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"build" : "runner",
+					"jsonFile" : "directory-runner-Release-86f38b7dcb6f33eb04e4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "runner",
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"build" : "plugins/desktop_drop",
+					"jsonFile" : "directory-plugins.desktop_drop-Release-8d64fd618de05621e7c7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "flutter/ephemeral/.plugin_symlinks/desktop_drop/windows",
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"build" : "plugins/irondash_engine_context",
+					"jsonFile" : "directory-plugins.irondash_engine_context-Release-24d8a2dc172ea834d9f2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "flutter/ephemeral/.plugin_symlinks/irondash_engine_context/windows",
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"build" : "plugins/super_native_extensions",
+					"jsonFile" : "directory-plugins.super_native_extensions-Release-e28787b3c0f294e714a2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "flutter/ephemeral/.plugin_symlinks/super_native_extensions/windows",
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "drawing_app",
+					"targetIndexes" : 
+					[
+						0,
+						5,
+						8,
+						9,
+						10
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "runner",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "desktop_drop",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						6
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "irondash_engine_context",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3,
+						11
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "super_native_extensions",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						12,
+						13
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ALL_BUILD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ALL_BUILD-Release-1a6d7c52a531523efc4f.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ALL_BUILD::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-ALL_BUILD-Release-674a2c4269d8c78c35d7.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ALL_BUILD::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-ALL_BUILD-Release-51e775be8d65233df547.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "ALL_BUILD::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-ALL_BUILD-Release-3d93db71cbe79dfb4062.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "ALL_BUILD::@9132bc3db381ba05852d",
+					"jsonFile" : "target-ALL_BUILD-Release-7c12796f81dc8a0ac251.json",
+					"name" : "ALL_BUILD",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ZERO_CHECK-Release-cb0f9946b613c287b074.json",
+					"name" : "ZERO_CHECK",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "desktop_drop_plugin::@953c5df2710b7092f2a0",
+					"jsonFile" : "target-desktop_drop_plugin-Release-5b8c8ff30cc4bc0831f3.json",
+					"name" : "desktop_drop_plugin",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "drawing_app::@056c4f61b0156d1d9b06",
+					"jsonFile" : "target-drawing_app-Release-55c86b5283a0ef0f800d.json",
+					"name" : "drawing_app",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_assemble::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_assemble-Release-73bf36e86aee8e2cf63a.json",
+					"name" : "flutter_assemble",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_app::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_app-Release-27958c3cdc25191a0089.json",
+					"name" : "flutter_wrapper_app",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "flutter_wrapper_plugin::@2bb09fbb03a373b2cb34",
+					"jsonFile" : "target-flutter_wrapper_plugin-Release-debc83448e50d59315e6.json",
+					"name" : "flutter_wrapper_plugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "irondash_engine_context_plugin::@9d4163d2d86979c26fd9",
+					"jsonFile" : "target-irondash_engine_context_plugin-Release-f25c0245581417b233f4.json",
+					"name" : "irondash_engine_context_plugin",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin-Release-a6c044ae119ad883cd82.json",
+					"name" : "super_native_extensions_plugin",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "super_native_extensions_plugin_cargokit::@9132bc3db381ba05852d",
+					"jsonFile" : "target-super_native_extensions_plugin_cargokit-Release-49231ec47eaadd917396.json",
+					"name" : "super_native_extensions_plugin_cargokit",
+					"projectIndex" : 4
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Repositories/drawing_app_for_uni/build",
+		"source" : "D:/Repositories/drawing_app_for_uni/drawing_app/windows"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
