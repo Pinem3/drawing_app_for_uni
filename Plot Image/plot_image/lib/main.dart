@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plot_image/homepage.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:plot_image/screens/work_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: FlexThemeData.light(
         colors: const FlexSchemeColor(
@@ -149,7 +151,8 @@ class MyApp extends StatelessWidget {
       //   visualDensity: FlexColorScheme.comfortablePlatformDensity,
       //   useMaterial3: true,
       // ),
-      home: Homepage(title: 'Plot Image'),
+      home: WorkPage(),
+      // home: WorkPage(),
     );
   }
 

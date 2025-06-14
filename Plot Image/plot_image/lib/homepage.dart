@@ -16,6 +16,7 @@ class Homepage extends StatefulWidget {
   List<String> logLost = [];
   Socket? socket;
   bool isParked = false;
+  bool stopped = false;
 
   Homepage({super.key, required this.title});
 
@@ -33,7 +34,9 @@ class _HomepageState extends State<Homepage> {
   bool normImage = false;
   late ui.Image uiImage;
   ButtonStyle buttonStyle = ButtonStyle(
-    shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+    ),
   );
 
   void setExternalData(Uint8List data, String type) {
@@ -80,7 +83,8 @@ class _HomepageState extends State<Homepage> {
                           width: 300,
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              constraints: BoxConstraints(maxHeight: 30),
+                              border: UnderlineInputBorder(),
                               hintText: 'Введите IP-адрес',
                             ),
                             onSubmitted: (value) {
@@ -108,7 +112,8 @@ class _HomepageState extends State<Homepage> {
                           width: 200,
                           child: TextField(
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              constraints: BoxConstraints(maxHeight: 30),
+                              border: UnderlineInputBorder(),
                               hintText: 'Введите Порт',
                             ),
                             onChanged: (value) {
@@ -164,7 +169,11 @@ class _HomepageState extends State<Homepage> {
                             inputPath = value;
                             if (inputPath.contains('"')) {
                               inputPath = inputPath.replaceFirst('"', '');
-                              inputPath = inputPath.replaceFirst('"', '', inputPath.length - 2);
+                              inputPath = inputPath.replaceFirst(
+                                '"',
+                                '',
+                                inputPath.length - 2,
+                              );
                             }
                             File file = File(inputPath);
                             var bytes = file.readAsBytesSync();
@@ -219,7 +228,9 @@ class _HomepageState extends State<Homepage> {
                                     ? null
                                     : () {
                                       setState(() {
-                                        widget.commands = vectorizeImage(image!);
+                                        widget.commands = generateSnakePath(
+                                          image!,
+                                        );
                                         normImage = false;
                                       });
                                     },
@@ -234,19 +245,26 @@ class _HomepageState extends State<Homepage> {
                           FilledButton(
                             style: buttonStyle,
                             onPressed:
-                                (widget.socket == null && widget.isParked == false)
+                                (widget.socket == null &&
+                                        widget.isParked == false)
                                     ? null
                                     : () async {
                                       setState(() {
-                                        widget.socket!.add(DrawingCommand.park().toBytes());
+                                        widget.socket!.add(
+                                          DrawingCommand.park().toBytes(),
+                                        );
                                       });
-                                      final stream = widget.socket!.asBroadcastStream();
+                                      final stream =
+                                          widget.socket!.asBroadcastStream();
                                       await stream.firstWhere(
-                                        (data) => data.isNotEmpty && data.first == 1,
+                                        (data) =>
+                                            data.isNotEmpty && data.first == 1,
                                       );
                                       setState(() {
                                         widget.isParked == true;
-                                        widget.logLost.add('Парковка выполнена');
+                                        widget.logLost.add(
+                                          'Парковка выполнена',
+                                        );
                                       });
                                     },
                             child: Text('Выполнить парковку'),
@@ -254,12 +272,31 @@ class _HomepageState extends State<Homepage> {
                           FilledButton(
                             style: buttonStyle,
                             onPressed:
-                                (image != null && normImage == false && widget.socket != null)
+                                (image != null &&
+                                        normImage == false &&
+                                        widget.socket != null)
                                     ? () {
-                                      sendCommandsWithAck(widget.commands, widget.socket);
+                                      sendCommandsWithAck(
+                                        widget.commands,
+                                        widget.socket,
+                                      );
                                     }
                                     : null,
                             child: Text('Отправить путь'),
+                          ),
+                          FilledButton(
+                            style: buttonStyle,
+                            onPressed:
+                                (image != null &&
+                                        normImage == false &&
+                                        widget.socket != null)
+                                    ? () {
+                                      setState(() {
+                                        widget.stopped = true;
+                                      });
+                                    }
+                                    : null,
+                            child: Text("Завершить"),
                           ),
                         ],
                       ),
@@ -281,8 +318,10 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           Align(
-            alignment: AlignmentGeometry.directional(0, 0),
-            child: ImageDropRegion(setExternalData: setExternalData, child: imageContainer()),
+            child: ImageDropRegion(
+              setExternalData: setExternalData,
+              child: imageContainer(),
+            ),
           ),
         ],
       ),
@@ -299,7 +338,11 @@ class _HomepageState extends State<Homepage> {
       setState(() {
         connectivity = 'Подключаемся по $host:$port';
       });
-      widget.socket = await Socket.connect(host, port, timeout: Duration(seconds: 5));
+      widget.socket = await Socket.connect(
+        host,
+        port,
+        timeout: Duration(seconds: 5),
+      );
     } catch (e) {
       setState(() {
         connectivity = 'Ошибка подключения: $e';
@@ -366,7 +409,9 @@ class _HomepageState extends State<Homepage> {
       if (!isPenDown ||
           (i > 0 && start.dx != path[i - 1].dx) ||
           (i > 0 && start.dy != path[i - 1].dy)) {
-        commands.add(DrawingCommand.moveTo(start.dx, start.dy)); // Поднять ручку
+        commands.add(
+          DrawingCommand.moveTo(start.dx, start.dy),
+        ); // Поднять ручку
         isPenDown = false;
       }
 
@@ -417,12 +462,125 @@ class _HomepageState extends State<Homepage> {
               commands: widget.commands,
               currentCommandIndex: currentCommandIndex,
               sourceImage: uiImage,
-              canvasSize: Size(image!.width.toDouble(), image!.height.toDouble()),
+              canvasSize: ui.Size(
+                image!.width.toDouble(),
+                image!.height.toDouble(),
+              ),
             ),
           ),
         ),
       );
     }
+  }
+
+  List<DrawingCommand> generateSnakePath(img.Image image) {
+    final commands = <DrawingCommand>[];
+    final width = image.width;
+    final height = image.height;
+    bool movingRight = true;
+    bool isPenDown = false;
+    int? lastX, lastY;
+
+    for (int y = 0; y < height; y++) {
+      // Быстрая проверка строки на наличие черных пикселей
+      if (!_hasBlackPixelsInRow(image, y)) {
+        movingRight =
+            !movingRight; // Инвертируем направление для следующей строки
+        continue;
+      }
+
+      int x = movingRight ? 0 : width - 1;
+      int? lineStartX;
+
+      while (movingRight ? x < width : x >= 0) {
+        bool shouldDraw = _shouldDrawPixel(image, x, y);
+
+        if (shouldDraw) {
+          // Находим конец непрерывного отрезка
+          int segmentEnd = x;
+          while (movingRight ? segmentEnd < width : segmentEnd >= 0) {
+            if (!_shouldDrawPixel(image, segmentEnd, y)) break;
+            movingRight ? segmentEnd++ : segmentEnd--;
+          }
+          movingRight ? segmentEnd-- : segmentEnd++;
+
+          // Добавляем команды для отрезка
+          _addOptimizedSegment(
+            commands: commands,
+            x1: x,
+            x2: segmentEnd,
+            y: y,
+            isPenDown: isPenDown,
+            lastX: lastX,
+            lastY: lastY,
+          );
+
+          // Обновляем позиции
+          lastX = segmentEnd;
+          lastY = y;
+          isPenDown = true;
+          x = segmentEnd; // Пропускаем обработанные пиксели
+        }
+
+        movingRight ? x++ : x--;
+      }
+
+      // Находим следующую строку с черными пикселями
+      int nextY = y + 1;
+      while (nextY < height && !_hasBlackPixelsInRow(image, nextY)) {
+        nextY++;
+      }
+
+      if (nextY < height) {
+        int targetX = movingRight ? width - 1 : 0;
+        bool shouldConnect = _shouldDrawPixel(image, targetX, nextY);
+
+        if (shouldConnect) {
+          commands.add(
+            DrawingCommand.lineTo(targetX.toDouble(), nextY.toDouble()),
+          );
+        } else {
+          commands.add(
+            DrawingCommand.moveTo(targetX.toDouble(), nextY.toDouble()),
+          );
+          isPenDown = false;
+        }
+        lastX = targetX;
+        lastY = nextY;
+      }
+
+      movingRight = !movingRight;
+      y = nextY - 1; // -1 потому что цикл for сделает y++
+    }
+
+    return commands;
+  }
+
+  bool _hasBlackPixelsInRow(img.Image image, int y) {
+    for (int x = 0; x < image.width; x++) {
+      if (_shouldDrawPixel(image, x, y)) return true;
+    }
+    return false;
+  }
+
+  void _addOptimizedSegment({
+    required List<DrawingCommand> commands,
+    required int x1,
+    required int x2,
+    required int y,
+    required bool isPenDown,
+    required int? lastX,
+    required int? lastY,
+  }) {
+    if (!isPenDown || lastX != x1 || lastY != y) {
+      commands.add(DrawingCommand.moveTo(x1.toDouble(), y.toDouble()));
+      commands.add(DrawingCommand.lineTo(x1.toDouble(), y.toDouble()));
+    }
+    commands.add(DrawingCommand.lineTo(x2.toDouble(), y.toDouble()));
+  }
+
+  bool _shouldDrawPixel(img.Image image, int x, int y) {
+    return img.getLuminance(image.getPixel(x, y)) < 128;
   }
 
   img.Image scaleImage(img.Image image) {
@@ -435,7 +593,10 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  Future<void> sendCommandsWithAck(List<DrawingCommand> commands, Socket? socket) async {
+  Future<void> sendCommandsWithAck(
+    List<DrawingCommand> commands,
+    Socket? socket,
+  ) async {
     if (socket == null) {
       connection(host, 228);
     }
@@ -443,6 +604,10 @@ class _HomepageState extends State<Homepage> {
     final stream = socket!.asBroadcastStream(); // Для чтения ответов
     try {
       for (int i = 0; i < commands.length; i++) {
+        if (widget.stopped == true) {
+          widget.stopped = false;
+          break;
+        }
         setState(() {
           widget.logLost.add('Отправка команды: ${commands[i].mode}');
         });
@@ -452,7 +617,9 @@ class _HomepageState extends State<Homepage> {
         await stream.firstWhere((data) => data.isNotEmpty && data.first == 2);
         setState(() {
           currentCommandIndex = i + 1;
-          widget.logLost.add('Подтверждение получено. Отправляю следующую команду...');
+          widget.logLost.add(
+            'Подтверждение получено. Отправляю следующую команду...',
+          );
         });
       }
       widget.logLost.add('Рисование завершено');

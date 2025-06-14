@@ -240,7 +240,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 },
                 child: Align(
-                  alignment: AlignmentGeometry.directional(0, 0),
+                  alignment: Alignment.center,
                   child: Container(
                     width: 200,
                     height: 200,
